@@ -9,6 +9,8 @@ spring:
     password: "1234!@#$"
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jwt:
+    secret: fkhasdlkfd34921740392178ueafihdioah1347
