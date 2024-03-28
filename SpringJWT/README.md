@@ -62,7 +62,7 @@
 - 이 결정 과정에서 컨테이너는 여러 개의 Filter를 순서대로 실행하는 FilterChain을 만들어 요청을 처리합니다.
 <br/>
 
-  <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/filterchain.png" alt="servlet-filters" width=400 align="center">
+  <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/filterchain.png" alt="servlet-filters" width=200 align="center">
 <br/>
 
 ### #2. DelegatingFilterProxy
@@ -70,7 +70,7 @@
 - doFilter() 메서드를 호출하여 Spring Bean에 모든 작업을 위임할 수 있습니다.
 <br/>
 
-  <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/delegatingfilterproxy.png" alt="delegating-filter-proxy" width=400 align="center">
+  <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/delegatingfilterproxy.png" alt="delegating-filter-proxy" width=200 align="center">
 <br/>
 
 ### #3. FilterChainProxy
