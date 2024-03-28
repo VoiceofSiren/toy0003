@@ -55,14 +55,14 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
-        // [6] User Entity 생성
+        // [6] User Entity를 생성
         //      - 비밀번호는 token에 담겨있지 않으므로 임시로 초기화시켜야 함.
         User user = new User(username, "tempPassword", role);
 
         // [7] UserDetails에 User Entity를 담기
         CustomedUserDetails customedUserDetails = new CustomedUserDetails(user);
 
-        // [8] Spring Security Authentication Token 생성
+        // [8] Spring Security의 Authentication Token 생성
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(customedUserDetails,
                 null,
                 customedUserDetails.getAuthorities());
@@ -70,6 +70,7 @@ public class JwtFilter extends OncePerRequestFilter {
         // [9] 세션에 사용자 정보를 등록
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
+        // [10] 다음 필터로 요청을 전달
         filterChain.doFilter(request, response);
     }
 }
