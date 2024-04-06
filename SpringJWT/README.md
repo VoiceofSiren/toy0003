@@ -13,7 +13,7 @@
 - [Architecture](#Architecture)
 - [Project Description](#Project-Description)
 - [Depolyment](#Deployment)
-- [Problems and Solutions](#Problems-and-Solutions)
+- [Trouble Shooting](#Trouble-Shooting)
 - [Reference](#Reference)
 <br/>
 
@@ -67,6 +67,8 @@
 
 ### #2. DelegatingFilterProxy
 - Servlet Container와 ApplicationContext를 연결해주는 Filter 구현체입니다.
+- WAS (Apache Tomcat)의 Filter들 중에서 다음 Filter로 넘어가기 전에 중간에 가로채어 SecurityFilterChain의 로직을 실행합니다.
+- Spring Bean을 찾아 요청을 넘겨줍니다.
 - doFilter() 메서드를 호출하여 Spring Bean에 모든 작업을 위임할 수 있습니다.
 <br/>
 
@@ -76,6 +78,7 @@
 ### #3. FilterChainProxy
 - Spring Security에서 제공하는 Filter입니다.
 - DelegatingFilterProxy에 의해 감싸지는 Bean입니다.
+- DelegatingFilterProxy가 요청을 가로채어 전달해 줄 목적지입니다.
 - FilterChainProxy 자체는 Servlet Container가 알아볼 수 없기 때문에 DelegatingFilterProxy라는 중간 필터를 사용하여 Servlet Container와 연결합니다.
 <br/>
 
@@ -83,9 +86,9 @@
 <br/>
 
 ### #4. SecurityFilterChain
-- FilterChainProxy에 의해 사용됩니다.
+- FilterChainProxy를 매개로 하여 사용됩니다.
 - FilterChain에 대한 정보를 담고 있는 클래스입니다.
-- Spring Security의 Filter 인스턴스들 중 무엇이 현재의 request에 적용되어야 할지를 결정합니다.
+- 인증, 인가, 검증 등을 수행하는 Filter들의 묶음입니다.
 <br/>
 
   <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png" alt="security-filter-chain" width=400 align="center">
@@ -219,7 +222,7 @@ Host AWStest0002
   <img src="src/main/resources/static/readme/aws-deployed-web-application.png" alt="ER Diagram" width=800>
 <br/>
 
-## Problems and Solutions
+## Trouble Shooting
 ### Mapping Entity
   - JPA에서는 Entity의 필드명과 실제 DB에 저장되어 있는 테이블의 칼럼명이 다른 경우 @Column(name="...")을 이용하여 처리할 수 있지만, MyBatis의 경우에는 그렇지 않았습니다.
   - MyBatis를 사용할 때는 \<resultMap\>을 이용하여 해결하였습니다.
