@@ -1,8 +1,8 @@
 <div>
     <h1 align="center">Toy Project - JWT Basic</h1>
     <p>
-    &nbsp; - 이 프로젝트는 JPA와 Spring Security를 이용하여 간단한 회원가입 및 로그인 검증을 수행하기 위한 애플리케이션입니다.<br>
-    &nbsp; - JWT를 사용하여
+    &nbsp; - 이 프로젝트는 JWT를 사용해 보는 API 개발용 JAVA 애플리케이션입니다.<br>
+      - Spring Security 6의 구조에 대한 내용을 포함하고 있습니다.
     </p>
 </div>
 <br/>
@@ -193,35 +193,6 @@ public class SecurityConfig {
     - 클라이언트의 HttpServletRequest로부터 username과 password를 추출하여 UsernamePasswordAuthenticationToken 객체를 생성한 후 검증을 위해 AuthenticationManager에게 해당 객체를 전달합니다.
     - 검증에 성공하면 HttpServletResponse 헤더에 JWT를 담아서 응답합니다.
     - 검증에 실패하면 상태코드 401을 응답합니다.
-<br/>
-    
-  + SecurityConfig
-### - Authentication
-- Spring Security 6를 사용하였습니다.
-    - Bean으로 등록할 SecurityFilterChain 메서드 내부에서 requestMatchers()를 사용하여 로그인한 사용자의 권한에 따라 접근 경로를 제한합니다.
-<br/>
-
-### - Authorization
-- Spring Security 6를 사용하였습니다.
-
-<table>
-  <thead>
-    <tr>
-      <th align="center">@EnableWebSecurity WebSecurityConfig 클래스</th>
-      <th align="center">Thymeleaf - Spring Security</th>
-    </tr>
-  <tbody>
-    <tr>
-      <td align="center"><img src="src/main/resources/static/readme/WebSecurityConfig-configureGlobal.png" width="500px;" alt=""/></td>
-      <td align="center">
-        <img src="src/main/resources/static/readme/thymeleaf-spring-security-namespace.png" width="500px;" alt=""/><br>
-        <img src="src/main/resources/static/readme/thymeleaf-authorize-hasRole.png" width="500px;" alt=""/>
-      </td>
-    <tr/>
-  </tbody>
-</table>
-
-1. 관리자의 권한을 가진 사용자만 게시물을 삭제할 수 있도록 설정하였습니다.
 <br/>
 
 ## Deployment
