@@ -89,6 +89,43 @@
 - FilterChainProxy를 매개로 하여 사용됩니다.
 - FilterChain에 대한 정보를 담고 있는 클래스입니다.
 - 인증, 인가, 검증 등을 수행하는 Filter들의 묶음입니다.
+- 아래와 같은 방법을 통해 여러 개의 SecurityFilterChain을 등록할 수 있습니다.
+```java
+import java.beans.BeanProperty;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    @Order(1)
+    public SecurityFilterChain securityFilterChain1(HttpSecurity http) throws Exception {
+        
+        http
+                .securityMatchers((auth) -> auth.requestMatchers("/user"));
+        
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/user").permitAll());
+        
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain securityFilterChain2(HttpSecurity http) throws Exception {
+
+        http
+                .securityMatchers((auth) -> auth.requestMatchers("/admin"));
+
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/admin").permitAll());
+        return http.build();
+    }
+}
+```
+- FilterChainProxy는 여러 개의 SecurityFilterChain 중 하나를 선택하여 요청을 전달하는데, SecurityFilterChain이 등록된 순서 (메서드가 정의된 순서 또는 @Order로 지정한 순서) 또는 매핑되어 있는 RequestMatcher 값이 일치하는지 확인하여 선택합니다.
 <br/>
 
   <img src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png" alt="security-filter-chain" width=400 align="center">
